@@ -1,0 +1,44 @@
+what i need to do next to finish this already
+1. photo for every product ✔
+2. balance for user ✔
+3. when order is proccesing, make some error checks:
+    if there is a valid product id ✔
+    if there is enough quantity to make order ✔
+    if there is enough balance ✔
+
+
+
+4. then when making order:
+    take product quantity ✔
+    take total amount of purchased from user's balance ✔
+
+
+front
+
+5. make alert that product is/already is in cart
+6. make add to cart functionality inindividual page
+
+7. maybe make context.............
+
+8. total amount in cart page ✔
+9. alerts maybe instead, for ui ✔
+10. buttons in cart page ✔
+11. orders page ✔
+12. top up your balance page ✔
+13. icons for nav-item ✔
+14. make interfaces reusable ✔
+
+15. after login home page ✔
+16. make home page main page  before login or register
+17. make shop for phone users
+18. calculate total ✔
+
+19. ui for wallet ✔
+
+
+
+
+
+
+that's all for now...
+maybe
