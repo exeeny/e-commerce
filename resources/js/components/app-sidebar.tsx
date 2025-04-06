@@ -38,7 +38,7 @@ const footerNavItems_main: NavItem[] = [
         },
         {
             title: 'Sign Up',
-            url: 'registration',
+            url: 'register',
             icon: UserPlus,
         },
 
