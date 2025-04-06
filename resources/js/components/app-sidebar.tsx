@@ -4,16 +4,12 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem, type SharedData } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Store, ShoppingCart, Package, Wallet } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Store, ShoppingCart, Package, Wallet, User, UserPlus } from 'lucide-react';
 import AppLogo from './app-logo';
 import { usePage} from '@inertiajs/react';
 
 const mainNavItems: NavItem[] = [
-    // {
-    //     title: 'Dashboard',
-    //     url: '/dashboard',
-    //     icon: LayoutGrid,
-    // },
+    
     {
         title: 'Home',
         url: '/home',
@@ -32,17 +28,23 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
+const footerNavItems_main: NavItem[] = [
+
+
+    {
+            title: 'Login',
+            url: '/login',
+            icon: User,
+        },
+        {
+            title: 'Sign Up',
+            url: 'registration',
+            icon: UserPlus,
+        },
+
+];
+
 const footerNavItems: NavItem[] = [
-    // {
-    //     title: 'Repository',
-    //     url: 'https://github.com/laravel/react-starter-kit',
-    //     icon: Folder,
-    // },
-    // {
-    //     title: 'Documentation',
-    //     url: 'https://laravel.com/docs/starter-kits',
-    //     icon: BookOpen,
-    // },
 
     {
         title: 'Wallet',
@@ -72,10 +74,13 @@ export function AppSidebar() {
                 <NavMain items={mainNavItems} />
             </SidebarContent>
 
-        {auth.user && <SidebarFooter>
+        {auth.user ?  <SidebarFooter>
                 <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
-            </SidebarFooter>}
+            </SidebarFooter> : <SidebarFooter>
+                <NavFooter items={footerNavItems_main} className="mt-auto" />
+            </SidebarFooter> 
+            }
             
         </Sidebar>
     );
