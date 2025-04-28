@@ -1,15 +1,14 @@
 Project Description:
 
 This project is a functional e-commerce application designed to facilitate online shoping experiences. 
-Built with Laravel ver. 12 and React library (using typescript) starter pack, it includes essential features such as product management, user authentication, 
-a cart system, and order processing.
+Built with Laravel ver. 12 + Inertia.js + React(typescript), using starter pack for auth system and some ui features. Project also includes essential features such as product management, a cart system, and order processing.
 
 Features:
-User registration and login system.
-Shopping cart functionality to add and remove items.
-Order processing:
- - Validates product availability and user balance.
- - Deducts stock quantity and user balance upon successful order completion.
+- User registration and login system.
+- Shopping cart functionality to add and remove items.
+- Order processing:
+    - Validates product availability and user balance.
+    - Deducts stock quantity and user balance upon successful order completion.
 
 Provides error messages for invalid actions.
 
