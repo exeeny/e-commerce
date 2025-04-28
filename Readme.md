@@ -17,7 +17,8 @@ Tech Stack:
 Frontend: React (TypeScript), Tailwind.
 Backend: Laravel framework.
 
-How to install:
+How to install (for herd users):
+
 
 - git clone https://github.com/exeeny/e-commerce.git
 - cd repository-name
@@ -25,6 +26,8 @@ How to install:
 - composer install
 - php artisan key:generate
 - php artisan migrate (click yes to make db file)
+- php artisan db:seed --class=ProductSeeder (seeding products into database with provided by me info)
+
 
 next:
 
@@ -32,3 +35,5 @@ next:
 - npm run build
 
 done
+
+if u're not a herd user, installing proccess is practically the same
