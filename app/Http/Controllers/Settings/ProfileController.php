@@ -60,4 +60,21 @@ class ProfileController extends Controller
 
         return redirect('/');
     }
+
+     public function showWallet() {
+        return Inertia::render('profile/wallet');
+    }
+
+    public function updateWallet(Request $request) {
+        $request->validate([
+            'balance' => 'required|numeric|min:0',
+        ]);
+        
+        $balance= $request->get('balance');
+
+        $request->user()->balance += $balance;
+        $request->user()->save();
+
+        return to_route('show_wallet')->with('message', 'wallet top up success');
+    }
 }

@@ -14,20 +14,16 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $user = $request->user();
-
         $productId = $request->input('product_id');
         $quantity = $request->input('quantity', 1);
 
         $product = Product::findOrFail($productId);
 
         if ($product->stock < $quantity) {
-            return response()->json(['message' => 'Not enough stock available'], 400);
+            return back()->with('alert', 'not enough stock!');
         }
-
         $cart = Cart::firstOrCreate(['user_id' => $user->id]);
         // No call to $user->save() needed
-
-
 
         // find first cart item, if item exists, update quantity
        $cartItem = CartDetail::where('cart_id', $cart->id)
@@ -39,25 +35,21 @@ class CartController extends Controller
 
         // Check if new quantity exceeds stock
             if ($product->stock < $newQuantity) {
-                return response()->json(['message' => 'Not enough stock available'], 400);
+                return back()->with('message','Not enough stock available');
             }
 
             $cartItem->update(['quantity' => $newQuantity]);
+            return back()->with('message','Successfully added more of this item!');
         } else {
-        
             CartDetail::create([
             'cart_id' => $cart->id,
             'product_id' => $productId,
             'quantity' => $quantity
         ]);
     }
-    
-
-    return response()->json(['message' => 'Product added to cart successfully']);
+    return redirect()->intended(route('home', absolute: false))->with('message','Product added to cart successfully');
     }
     
-    
-    //remove
     public function removeFromCart(Request $request)
     {
         $cart = $request->user()->cart;
@@ -75,41 +67,36 @@ class CartController extends Controller
                 $cartItem->delete();
             }
         }
-
-        return response()->json(['cart' => $cart]);
+        return back()->with('message','Product was removed from cart!');;
     }
 
-
-    //get cart items
-    public function getCartItems(Request $request)
+    public function showCart(Request $request)
     {
-
         $cart = $request->user()->cart;
         $total = 0;
+        if (!$cart) {
+            return Inertia::render('cart', [
+            'cart' => [],
+            'total' => $total
+        ]);
+        }
 
         foreach ($cart->details as $item) {
             $total += $item->product->price * $item->quantity;
         }
 
         $cartItems = $cart->details()->with('product')->get();
-
-
-        return response()->json(['cart' => $cartItems, 'total' => $total]);
-        
+        return Inertia::render('cart', [
+            'cart' => $cartItems,
+            'total' => $total
+        ]);
     }
 
-    public function showCart()
-    {
-        return Inertia::render('cart');
-    }
-
-    //clear
     public function clearCart(Request $request)
     {
-        $cart = $request->user()->cart();
+        $cart = $request->user()->cart;
         $cart->delete();
-
-        return response()->json(['message' => 'cart was deleted successfully!']);
+        return redirect('/')->with('message','cart was cleared successfully!'); 
     }
     
 }

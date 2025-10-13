@@ -13,25 +13,21 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $cart = $user->cart;
-
         $cartItems = $cart->details;
-        
         $total = 0;
 
         foreach ($cartItems as $item){
             $product = Product::find($item->product_id);
             // if product exists
             if (!$product) {
-                return response()->json(['message' => 'Product not found'], 404);
+                return back()->with('message', 'Product not found');
             }
-
             $total += $product->price * $item->quantity;
-
         }
 
         // if user has enough balance
         if ($total > $user->balance){
-            return response()->json(['message' => 'not enough balance'], 404);
+            return back()->with('message', 'not enough balance!', );
         }
 
         $order = $user->orders()->create();
@@ -48,36 +44,27 @@ class OrderController extends Controller
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
-
         }
-
         $order->details()->createMany($orderDetails);
+        $user->balance = round($user->balance - $total, 2);
         
-
-        $user->balance -= $total;
         $user->save();
-        
         $cart->delete();
-        return response()->json(['message' => 'Order placed successfully']);
+        return redirect('/')->with('message', 'Order placed successfully');
     }
 
-    public function index()
-    {
-        return Inertia::render('orders');
-    }
-
-    public function getOrders(Request $request)
+    public function index(Request $request)
     {
         $orders = $request->user()->orders()->with('details.product')->get();
-        
-        return response()->json($orders);
+        return Inertia::render('orders', [
+            'orders' => $orders
+        ]);
     }
 
     public function clearHistory()
     {
         $user = Auth::user();
         $user->orders()->delete();
-
-        return response()->json(['message' => 'history was deleted successfully!']);
+        return redirect('/')->with('message', 'history was deleted successfully!');
     }
 }

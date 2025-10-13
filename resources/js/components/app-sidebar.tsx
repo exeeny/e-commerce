@@ -12,19 +12,19 @@ import AppearanceToggleDropdown from '@/components/appearance-dropdown';
 const mainNavItems: NavItem[] = [
     {
         title: 'Home',
-        url: '/home',
+        url: '/',
         icon: Store, 
     },
     {
-        title: 'cart',
+        title: 'Cart',
         url: '/cart',
-        icon: ShoppingCart, // Change this to any suitable icon
+        icon: ShoppingCart, 
     },
 
     {
-        title: 'orders',
+        title: 'Orders',
         url: '/orders',
-        icon: Package, // Change this to any suitable icon
+        icon: Package, 
     },
 ];
 

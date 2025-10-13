@@ -6,31 +6,21 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\profileController;
-
-// Route::get('/', function () {
-//     return Inertia::render('welcome');
-// })->name('home');
+use App\Http\Controllers\Settings\ProfileController as SettingsProfileController;
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
-Route::get('/home', [ProductController::class, 'index'])->name('main');
 Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
-
-    Route::get('/profile/wallet', [profileController::class, 'showWallet']);
-    Route::put('/profile/wallet', [profileController::class, 'updateWallet']);
-    Route::post('/cart/add', [CartController::class, 'addToCart']);
-    Route::post('/cart/remove', [CartController::class, 'removeFromCart']);
-    Route::get('/getCart', [CartController::class, 'getCartItems']);
-    Route::get('/cart', [CartController::class, 'showCart']);
-    Route::post('/cart/clear', [CartController::class, 'clearCart']);
-    Route::post('/order/make', [OrderController::class, 'store'] );
+    Route::get('/profile/wallet', [SettingsProfileController::class, 'showWallet'])->name('show_wallet');
+    Route::patch('/profile/wallet', [SettingsProfileController::class, 'updateWallet'])->name('update_wallet');
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('add_to_cart');
+    Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('remove_from_cart');
+    Route::get('/cart', [CartController::class, 'showCart'])->name('cart_show');
+    Route::delete('/cart/clear', [CartController::class, 'clearCart'])->name('clear_cart');
+    Route::post('/order/make', [OrderController::class, 'store'] )->name('make_order');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
-    Route::get('/getOrders', [OrderController::class, 'getOrders']);
-    Route::post('/orders/clear', [OrderController::class, 'clearHistory']);
+    Route::delete('/orders/clear', [OrderController::class, 'clearHistory'])->name('clear_orders');
 });
 
 require __DIR__.'/settings.php';
