@@ -10,6 +10,8 @@ import {
     CardTitle,
     CardDescription
 } from "@/components/ui/card"
+import { useContext, useEffect } from 'react';
+import { CartContext } from '@/services/CartContext';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -18,15 +20,23 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Cart({ cart, total }: any) {
+export default function Cart() {
+    
+    const {cart_fetched, addToCart, revomeFromCart,total, clearCart} = useContext(CartContext);
     const { auth } = usePage<SharedData>().props;
-
+    
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title='cart' />
-            {(cart.length == 0) ? <h1 className='text-5xl mx-auto mt-4'>Cart is empty!</h1> : <>
+           
+            {cart_fetched.length === 0 ? <div className='flex flex-col gap-3'> <h1 className='text-5xl mx-auto mt-4'>Cart is empty!</h1>
+            <Link href={route('home')}>
+                                Return to shop
+                        </Link>
+            </div> : <>
                 <div className='flex flex-col items-center p-3 gap-2'>
-                    {cart.map((item: any) => (
+                    
+                    {cart_fetched.map((item: any) => (
                             <Card className=''>
                                 <CardHeader>
                                     <CardTitle>{item.product.name}</CardTitle>
@@ -38,19 +48,15 @@ export default function Cart({ cart, total }: any) {
                                 <CardFooter className="flex justify-between items-center mt-4">
                                     <h1 className="text-xl font-semibold text-gray-900 dark:text-white">${item.product.price}</h1>
                                     <div className="flex items-center gap-2">
-                                        <Link href={route('remove_from_cart')} method='post' data={{ product_id: item.product.id }}>
-                                            <Button>
+                                        
+                                            <Button onClick={()=>revomeFromCart(item.product.id)}>
                                                 -
                                             </Button>
-                                        </Link>
-
+                                        
                                         <h1>{item.quantity}</h1>
-                                        <Link href={route('add_to_cart')} method='post' data={{ product_id: item.product.id }}>
-                                            <Button>
+                                            <Button onClick={() => addToCart(item.product.id, 'cart')}>
                                                 +
                                             </Button>
-                                        </Link>
-
                                     </div>
                                 </CardFooter>
                             </Card>
@@ -58,24 +64,22 @@ export default function Cart({ cart, total }: any) {
                     ))}
 
                     <div className="flex flex-col m-2 items-center gap-1">
-                        <p className="text-lg font-semibold text-gray-900 dark:text-white">total: ${total.toFixed(2)}</p>
+                        
+                        <p className="text-lg font-semibold text-gray-900 dark:text-white">total: ${total}</p>
                         <p className="text-lg font-semibold text-red-500">
                             {total > auth.user.balance && 'not enough balance!!!'}
                         </p>
                     </div>
 
                     <div className="flex justify-center gap-4 flex-wrap mt-4">
-                        <Link href={route('clear_cart')} method="delete">
-                            <Button variant='outline'>
+                        <Button onClick={clearCart}>
                                 Clear Cart
-                            </Button>
-                        </Link>
+                        </Button>
 
-                        <Link href={route('make_order')} method="post">
-                            <Button>
+                        <Link href={route('make_order', {total: total})} method="post">
                                 Make Order
-                            </Button>
                         </Link>
+                        
 
                     </div>
                 </div>

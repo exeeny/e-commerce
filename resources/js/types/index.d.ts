@@ -43,7 +43,6 @@ export interface User {
 }
 
 
-
 export interface Product {
     id: number;
     name: string;
@@ -79,3 +78,12 @@ interface CartItem {
     product: Product;
     product_id: number;
 } 
+
+export interface ShopInterface {
+    cart_fetched: CartItem[]; 
+    addToCart: (product_id: number, context:string) => void;
+    revomeFromCart: (product_id: number) => void;
+    fetchCart: () => void;
+    total: number; 
+    clearCart: () => void;
+}

@@ -8,6 +8,8 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 import ProductCard from '@/components/product-card';
+import { useContext } from 'react';
+import { CartContext } from '@/services/CartContext';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -17,6 +19,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Home({ products }: { products: Product[] }) {
+    
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>

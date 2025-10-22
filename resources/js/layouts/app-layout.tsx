@@ -12,7 +12,6 @@ interface AppLayoutProps {
 
 export default ({ children, breadcrumbs, ...props }: AppLayoutProps) => {
     const {flash} = usePage().props;
-    console.log(flash)
     return (
     <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>
         {flash.message && <Alert>

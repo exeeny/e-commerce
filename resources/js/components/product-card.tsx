@@ -1,5 +1,5 @@
 import { Product } from "@/types"
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import {
     Tooltip,
@@ -13,8 +13,13 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { useContext } from "react";
+import { CartContext } from "@/services/CartContext";
 
 function ProductCard({ product }: { product: Product }) {
+    const {addToCart, cart_fetched} = useContext(CartContext);
+
+
     return (<>
         <Card>
             <CardHeader>
@@ -41,11 +46,12 @@ function ProductCard({ product }: { product: Product }) {
                 <span className="text-3xl font-bold text-gray-900 dark:text-white">
                     ${product.price}
                 </span>
-                <Link href={route('add_to_cart')} method='post' data={{ product_id: product.id }}>
-                    <Button>
-                        Add to cart
-                    </Button>
-                </Link>
+                <Button onClick={() => addToCart(product.id, 'home')}>
+                    Add to cart
+                    
+                </Button>
+
+
             </CardFooter>
         </Card>
     </>

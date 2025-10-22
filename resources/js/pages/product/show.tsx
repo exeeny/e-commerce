@@ -2,7 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { Product } from '@/types';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import { Button } from '@/components/ui/button';
@@ -14,7 +14,9 @@ import {
     CardTitle,
     CardDescription
 } from "@/components/ui/card"
-
+import axios from 'axios';
+import Swal from 'sweetalert2'
+import { CartContext } from '@/services/CartContext';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -28,8 +30,8 @@ interface HomeProps {
 }
 
 export default function Show({ product }: HomeProps) {
+    const {addToCart} = useContext(CartContext);
     const [open, setOpen] = useState(false);
-
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -51,12 +53,12 @@ export default function Show({ product }: HomeProps) {
                     </CardContent>
                     <CardFooter className='flex justify-between items-center '>
                         <p> ${product.price}</p>
-                        <Link href={route('add_to_cart')} method='post' data={{ product_id: product.id }}>
-                            <Button>
+                        
+                            <Button onClick={()=>addToCart(product.id)}>
                                 Add to cart
                             </Button>
 
-                        </Link>
+                        
                     </CardFooter>
                 </Card>
             </div>
