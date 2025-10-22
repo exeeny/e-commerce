@@ -5,7 +5,8 @@ Built with Laravel ver. 12 + Inertia.js + React(typescript), using starter pack 
 
 ---
 
-<img width="1606" height="896" alt="home" src="https://github.com/user-attachments/assets/ddb8ecc4-d039-47b3-9f57-66abb30d1f03" />
+<img width="1659" height="868" alt="home" src="https://github.com/user-attachments/assets/18f1466d-e18f-4773-8af4-2c08db4ceec5" />
+
 
 ## Tech Stack:
 Frontend: React (TypeScript) + Inertia.js
