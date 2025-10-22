@@ -30,9 +30,14 @@ UI: Tailwind CSS, shadcn/ui
 
 ## additional features
 - Error/success messages for invalid/successfull actions.
-<img width="478" height="212" alt="alert" src="https://github.com/user-attachments/assets/99282276-6c68-4941-8fef-f72f8e1ddf17" />
-<img width="394" height="141" alt="success_message" src="https://github.com/user-attachments/assets/186e166a-c13b-44e4-ba8a-1afd397343f3" />
+<img width="45%" alt="successmesage" src="https://github.com/user-attachments/assets/6cf0bdb7-50b4-4be9-a179-07731ff5d8f8" />
+<img width="45%" alt="errormessage" src="https://github.com/user-attachments/assets/85dc3fc8-a002-4ba0-af86-5d6010043c60" />
+<img width="426" height="89" alt="topalert" src="https://github.com/user-attachments/assets/8079123c-3a79-4e22-80f5-637245b03cbe" />
+<img width="384" height="85" alt="topsuccess" src="https://github.com/user-attachments/assets/f84b698e-0177-4912-b009-98b873e55d6e" />
+
 - Product individual page with lightbox picture view
 <img width="1602" height="900" alt="show" src="https://github.com/user-attachments/assets/3840925d-f3b3-41bb-85cf-9399b3f87ce5" />
 <img width="1625" height="929" alt="lightbox" src="https://github.com/user-attachments/assets/ff016105-8f53-456a-a73e-085401dc954d" />
+- React useContext for state management
+- Using of laravel services
 
