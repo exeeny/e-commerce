@@ -32,6 +32,7 @@ interface HomeProps {
 export default function Show({ product }: HomeProps) {
     const {addToCart} = useContext(CartContext);
     const [open, setOpen] = useState(false);
+    
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -54,11 +55,9 @@ export default function Show({ product }: HomeProps) {
                     <CardFooter className='flex justify-between items-center '>
                         <p> ${product.price}</p>
                         
-                            <Button onClick={()=>addToCart(product.id)}>
+                            <Button className='cursor-pointer' onClick={()=>addToCart(product.id, 'show')}>
                                 Add to cart
                             </Button>
-
-                        
                     </CardFooter>
                 </Card>
             </div>

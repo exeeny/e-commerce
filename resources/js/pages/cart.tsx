@@ -29,10 +29,12 @@ export default function Cart() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title='cart' />
            
-            {cart_fetched.length === 0 ? <div className='flex flex-col gap-3'> <h1 className='text-5xl mx-auto mt-4'>Cart is empty!</h1>
-            <Link href={route('home')}>
+            {cart_fetched.length === 0 ? 
+            <div className='flex flex-col gap-3 items-center'> 
+                <h1 className='text-4xl mt-3'>Cart is empty!</h1>
+                <Link href={route('home')}  className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]">
                                 Return to shop
-                        </Link>
+                </Link>
             </div> : <>
                 <div className='flex flex-col items-center p-3 gap-2'>
                     
@@ -79,8 +81,6 @@ export default function Cart() {
                         <Link href={route('make_order', {total: total})} method="post">
                                 Make Order
                         </Link>
-                        
-
                     </div>
                 </div>
             </>

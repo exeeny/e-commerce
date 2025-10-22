@@ -30,7 +30,13 @@ export default function Order({ orders }: any) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title='Orders' />
             {orders.length == 0
-                ? <h1 className='text-5xl text-center mt-4'>You have not order anything yet!</h1>
+                ? <div className='flex flex-col items-center gap-3'>
+                    <h1 className='text-4xl mt-4'>You have not order anything yet!</h1>
+                    <Link href={route('home')}  className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]">
+                                Return to shop
+                </Link>
+                </div> 
+                
                 :
                 <div className='p-3'>
                 <Accordion type="single" collapsible>

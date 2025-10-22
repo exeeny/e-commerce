@@ -26,7 +26,7 @@ class OrderController extends Controller
         try {
            $this->orderService->placeOrder();
         } catch (\Exception $exception) {
-            return response()->json(['alert' => $exception->getMessage()], 422);
+            return back()->with('alert' , $exception->getMessage());
         }
         return redirect('/')->with('message', 'Order placed successfully');
     }

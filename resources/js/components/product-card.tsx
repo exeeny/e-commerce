@@ -30,7 +30,6 @@ function ProductCard({ product }: { product: Product }) {
             <CardContent>
                 <Link href={route('product.show', product.id)} prefetch>
                     <Tooltip>
-
                         <TooltipContent>
                             <p>{product.stock} in stock</p>
                         </TooltipContent>
@@ -46,7 +45,7 @@ function ProductCard({ product }: { product: Product }) {
                 <span className="text-3xl font-bold text-gray-900 dark:text-white">
                     ${product.price}
                 </span>
-                <Button onClick={() => addToCart(product.id, 'home')}>
+                <Button className="cursor-pointer" onClick={() => addToCart(product.id, 'home')}>
                     Add to cart
                     
                 </Button>

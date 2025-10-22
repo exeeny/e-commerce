@@ -8,6 +8,8 @@ import { BookOpen, Folder, LayoutGrid, Store, ShoppingCart, Package, Wallet, Use
 import AppLogo from './app-logo';
 import { usePage} from '@inertiajs/react';
 import AppearanceToggleDropdown from '@/components/appearance-dropdown';
+import { useContext } from 'react';
+import { CartContext } from '@/services/CartContext';
 
 const mainNavItems: NavItem[] = [
     {
